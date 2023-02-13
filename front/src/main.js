@@ -8,12 +8,11 @@ import iView from 'iview';
 import 'iview/dist/styles/iview.css';    // 使用 CSS
 import './theme.less'
 import * as echarts from 'echarts';
-
 Vue.use(iView);
 Vue.prototype.$echarts = echarts
 console.log(echarts)
 Vue.config.productionTip = false
-
+Vue.prototype.$bus = new Vue()
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

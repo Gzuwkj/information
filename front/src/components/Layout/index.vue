@@ -6,15 +6,19 @@
         <h3 style="margin-left: 1rem">信息抽取平台</h3>
       </div>
       <div class="menu-items">
-        <Menu-item name="1">
+        <Menu-item name="1" >
           <Icon type="ios-paper"></Icon>
           主页
         </Menu-item>
         <Menu-item name="2">
+          <Icon type="ios-paper"></Icon>
+          科研团队
+        </Menu-item>
+        <Menu-item name="3">
           <Icon type="ios-people"></Icon>
           分析
         </Menu-item>
-        <Submenu name="3">
+        <Submenu name="4">
           <template slot="title">
             <Icon type="stats-bars"></Icon>
             关于
@@ -32,9 +36,10 @@
       </div>
     </Menu>
     <div style="height: 0;flex-grow: 1;flex-shrink: 1;overflow: auto">
-      <div class="layout-content">
+      <div class="layout-content" v-if="">
         <router-view/>
       </div>
+
       <div class="layout-copy">
         2011-2016 &copy; TalkingData
       </div>

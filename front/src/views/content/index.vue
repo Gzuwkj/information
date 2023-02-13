@@ -8,7 +8,7 @@
         <t-input></t-input>
       </Col>
     </Row>
-    <display></display>
+    <display ref="importValue"></display>
     <Row class="row bg-white " style="height: 40rem" :gutter="16">
       <Tabs style="height: 100%" class="d-flex" value="name1" cust-content-class="height-100">
         <Tab-pane label="嵌套实体联系图" name="name1">
@@ -31,8 +31,15 @@ export default {
     't-input': input,
     display,
     EntityNestingDiagram
+  },
+  methods:{
+    create(){
+      this.$refs.importValue.test()
+    }
+
   }
 }
+
 </script>
 
 <style  scoped>
