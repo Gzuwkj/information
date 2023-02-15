@@ -7,7 +7,7 @@
     </Row>
     <Row class="padding-top">
       <h4 class="padding-bottom">实体抽取模型</h4>
-      <Cascader :data="entityModel" @on-change="(value, selectedData) => handleChange(value,selectedData)"
+      <Cascader :data="entityModel" @on-change="(value, selectedData) => handleChange(value, selectedData)"
                 id="entity"></Cascader>
     </Row>
     <Row class="padding-top">
@@ -20,8 +20,6 @@
 
 <script>
 import {getNerModelsList} from "@/api";
-
-
 export default {
   name: "newsdataset",
   created() {
