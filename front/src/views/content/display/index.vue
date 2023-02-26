@@ -4,13 +4,22 @@
     <Tabs :animated="false" style="height: 100%;display: flex;flex-direction: column" value="name1"
           cust-content-class="tabs-container">
       <Tab-pane label="实体抽取情况" name="name1">
-        <paragraph v-for="(p, idx) in entityInfo" :paragraph="p" :key="idx"/>
+        <paragraph v-if="waiting===false" v-for="(p, idx) in entityInfo" :paragraph="p" :key="idx"/>
+        <div v-else class="demo-spin-container">
+          <Spin size="large" fix></Spin>
+        </div>
       </Tab-pane>
       <Tab-pane label="关系抽取情况" name="name2">
-        <paragraph v-for="(p, idx) in relationInfo" :paragraph="p" :key="idx"/>
+        <paragraph v-if="waiting===false" v-for="(p, idx) in relationInfo" :paragraph="p" :key="idx"/>
+        <div v-else class="demo-spin-container">
+          <Spin size="large" fix></Spin>
+        </div>
       </Tab-pane>
-
       <Tab-pane label="事件抽取情况" name="name3">
+        <paragraph v-if="waiting===false" v-for="(p, idx) in relationInfo" :paragraph="p" :key="idx"/>
+        <div v-else class="demo-spin-container">
+          <Spin size="large" fix></Spin>
+        </div>
       </Tab-pane>
     </Tabs>
   </Row>
@@ -27,6 +36,7 @@ export default {
 
   data() {
     return {
+      waiting: false,
       entityInfo: [],
       relationInfo: [],
       entityType2Color: {
@@ -50,6 +60,7 @@ export default {
   },
 
   created() {
+    window.waiting=false
     let text = `{"sentence": ["新", "华", "社", "兰", "州"], "ner": [{"index": [0, 3], "type": "ORG"}]}`
     const jsons = [
       JSON.parse(text),
@@ -70,19 +81,21 @@ export default {
   computed: {},
   methods: {
     test() {
-      console.log(window.relationAPI)
-      console.log(window.entityAPI)
-      console.log(window.eventAPI)
-      console.log(window.text)
       let params = {
         api_id: [window.entityAPI, window.relationAPI, window.eventAPI],
         text: window.text
       }
+      this.waiting=true
+      this.$parent.setWaiting()
       getSentence(params).then(response => {
+        this.waiting=false
+        this.$parent.setWaiting()
         console.log(response)
-        let entityJson = {sentence: response.ner_sentence, ner: response.ner}
+        let entityJson = {sentence: response.ner_sentence, ner: response.ner[0]}
+        console.log(entityJson)
         let jsons = [entityJson,]
         this.entityInfo = jsons.map(i => this.processE(i))
+        console.log(this.entityInfo)
         let relationJson = {
           tokens: response.relation_sentence,
           e1: response.e1[0],
@@ -229,5 +242,13 @@ h4 {
 .tabs-container .ivu-tabs-tabpane {
   height: 100%;
   overflow-y: auto;
+}
+
+.demo-spin-container {
+  display: inline-block;
+  width: 100%;
+  height: 300px;
+  overflow-y: auto;
+  position: relative;
 }
 </style>

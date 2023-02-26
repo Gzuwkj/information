@@ -1,7 +1,7 @@
 <template>
   <Tabs :animated="false">
     <Tab-pane label="新闻数据集">
-      <newsdataset></newsdataset>
+      <newsdataset ref="newsdataset"></newsdataset>
     </Tab-pane>
     <Tab-pane label="生物数据集">
       <biodataset></biodataset>

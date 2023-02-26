@@ -2,7 +2,12 @@
   <div class="content-main">
     <Input class="input" type="textarea" :rows="4" v-model="text" placeholder="请输入抽取原始文本"></Input>
     <Row>
-      <Button type="primary" :loading="loading" shape="circle" icon="ios-search" @click="create">构建</Button>
+      <Button v-if="this.waiting===false" type="primary" :loading="loading" shape="circle" icon="ios-search"
+              @click="create">构建
+      </Button>
+      <Button v-else disabled="disabled" type="primary" :loading="loading" shape="circle" icon="ios-search"
+              @click="create">构建
+      </Button>
     </Row>
   </div>
 </template>
@@ -12,6 +17,7 @@ export default {
   name: "index",
   data() {
     return {
+      waiting: false,
       text: '',
       loading: false
     }
@@ -20,6 +26,9 @@ export default {
     create() {
       window.text = this.text
       this.$parent.$parent.$parent.create()
+    },
+    setWaiting() {
+      this.waiting = !this.waiting
     }
   }
 }

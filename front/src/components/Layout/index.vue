@@ -1,45 +1,51 @@
 <template>
   <div class="layout">
-    <Menu mode="horizontal" active-name="1" class="menu">
+    <Menu mode="horizontal" active-name="1" class="menu" @on-select="searchSelect">
       <div class="layout-logo">
         <img :src="logo" style="height: 80%" alt="">
         <h3 style="margin-left: 1rem">信息抽取平台</h3>
       </div>
-      <div class="menu-items">
+      <div class="menu-items" on-select="select">
         <Menu-item name="1" >
           <Icon type="ios-paper"></Icon>
           主页
         </Menu-item>
         <Menu-item name="2">
           <Icon type="ios-paper"></Icon>
-          科研团队
+          问答系统
         </Menu-item>
         <Menu-item name="3">
+          <Icon type="ios-paper"></Icon>
+          科研团队
+        </Menu-item>
+        <Menu-item name="4">
           <Icon type="ios-people"></Icon>
           分析
         </Menu-item>
-        <Submenu name="4">
-          <template slot="title">
-            <Icon type="stats-bars"></Icon>
-            关于
-          </template>
-          <Menu-group title="使用">
-            <Menu-item name="3-1">新增和启动</Menu-item>
-            <Menu-item name="3-2">活跃分析</Menu-item>
-            <Menu-item name="3-3">时段分析</Menu-item>
-          </Menu-group>
-          <Menu-group title="留存">
-            <Menu-item name="3-4">用户留存</Menu-item>
-            <Menu-item name="3-5">流失用户</Menu-item>
-          </Menu-group>
-        </Submenu>
+<!--        <Submenu name="5">-->
+<!--          <template slot="title">-->
+<!--            <Icon type="stats-bars"></Icon>-->
+<!--            关于-->
+<!--          </template>-->
+<!--          <Menu-group title="使用">-->
+<!--            <Menu-item name="3-1">新增和启动</Menu-item>-->
+<!--            <Menu-item name="3-2">活跃分析</Menu-item>-->
+<!--            <Menu-item name="3-3">时段分析</Menu-item>-->
+<!--          </Menu-group>-->
+<!--          <Menu-group title="留存">-->
+<!--            <Menu-item name="3-4">用户留存</Menu-item>-->
+<!--            <Menu-item name="3-5">流失用户</Menu-item>-->
+<!--          </Menu-group>-->
+<!--        </Submenu>-->
       </div>
     </Menu>
     <div style="height: 0;flex-grow: 1;flex-shrink: 1;overflow: auto">
-      <div class="layout-content" v-if="">
+      <div class="layout-content" v-if="select==='1'">
         <router-view/>
       </div>
-
+      <div class="layout-content" v-if="select==='2'">
+        <QA></QA>
+      </div>
       <div class="layout-copy">
         2011-2016 &copy; TalkingData
       </div>
@@ -48,11 +54,21 @@
 </template>
 <script>
 import img from '@/assets/logo.png'
+import QA from '@/views/QA/index.vue'
 export default {
   name: "index",
   data(){
     return {
+      select:'1',
       logo: img
+    }
+  },
+  components: {
+    QA
+  },
+  methods:{
+    searchSelect(id){
+      this.select=id
     }
   }
 }
@@ -62,12 +78,13 @@ export default {
 .layout{
   border: 1px solid #d7dde4;
   background: #f5f7f9;
-  height: 100vh;
+  height: 100%;
   overflow: hidden;
   display: flex;
   flex-direction: column;
 }
 .layout-content{
+  height: 100%;
   width: 100%;
   padding: 2rem 4rem;
   border-radius: 4px;
