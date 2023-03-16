@@ -46,6 +46,9 @@
       <div class="layout-content" v-if="select==='2'">
         <QA></QA>
       </div>
+      <div class="layout-content" v-if="select==='3'">
+        <team></team>
+      </div>
       <div class="layout-copy">
         2011-2016 &copy; TalkingData
       </div>
@@ -55,6 +58,8 @@
 <script>
 import img from '@/assets/logo.png'
 import QA from '@/views/QA/index.vue'
+import team from "@/views/team";
+
 export default {
   name: "index",
   data(){
@@ -64,6 +69,7 @@ export default {
     }
   },
   components: {
+    team,
     QA
   },
   methods:{

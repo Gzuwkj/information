@@ -1,0 +1,101 @@
+<template>
+  <div id="tdls">
+    <h1 class="title">团队老师</h1>
+    <div class="bord">
+      <h3 class="title">教授</h3>
+      <div class="bord" v-for="t in teachers">
+        <teacher-item :imgUrl=t.imgUrl :aHref=t.aHref :name=t.name :info=t.info></teacher-item>
+      </div>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      <div class="clear">&nbsp;</div>
+    </div>
+  </div>
+</template>
+
+<script>
+import TeacherItem from "./TeacherItem";
+
+export default {
+  name: "teamteacher",
+  components:{
+    TeacherItem
+  },
+  data() {
+    return{
+      teachers: [
+        {imgUrl:require("@/assets/Qin.png"), aHref:"http://cs.gzu.edu.cn/2021/1210/c16356a163794/page.htm", name:"秦永彬", info:"秦永彬，教授、博士、博士生导师。现为贵州大学计算机科学与技术学院（贵州大学省级示范性软件学院）院长，公共大数据国家重点实验室常务副主任，文本计算与认知智能教育部工程研究中心主任。中国计算机学会（CCF）高级会员，中国计算机学会大数据专家委员会委员，贵州省计算机学会副理事长兼秘书长，ACM中国区重庆分会副主席，《大数据》期刊第2届、第3届编委会编委。贵州省放管服领导小组专家组数字化专家，贵州省大数据发展领导小组专家库首批专家，贵州省大数据教育及网络安全教学指导委员会委员，贵州省教育信息化专家委员会委员。贵州省首届数字经济领域重点人才。"},
+        {imgUrl:require("@/assets/logo.png"), aHref:"http://cs.gzu.edu.cn/2021/1210/c16356a163849/page.htm", name:"陈艳平", info:"陈艳平，男，博士，贵州大学计算机学院教授、大数据学部特聘教授、学科学术带头人、硕士研究生导师、省部共建公共大数据国家重点实验室数据融合方向副主任、教育部文本计算与认知智能工程研究中心副主任、中国计算机学会信息系统专委会执行委员。研究方向为自然语言处理，相关研究成果在ACL、Artificial Intelligence、Neural Network、Information Science、Information Fusion、IEEE Intelligent Systems、Natural Language Engineering、Cognitive Computation等国际顶级刊物上发表。长期承担ACL、AAAI、IJCAI、ICDM、KDD、TKDE、ECAI、TASL等人工智能和自然语言处理国际会议或期刊的程序委员会委员或审稿人，第三届大数据技术国际会议分会主席，第七届机器人与人工智能国际会议技术主席。共发表各类会议期刊论文60余篇。其中，第一作者和通讯作者SCI论文20余篇、CCF 会议期刊6篇、EI会议论文4篇。主持/参与国家级项目6项、省/部级项目5项、校级项目2项、横向项目3项。获得国家发明专利授权2项。主持国家级、校级教改项目2项、发表教改论文3篇。"},
+        {imgUrl:require("@/assets/logo.png"), aHref:"http://cs.gzu.edu.cn/2021/1210/c16356a163800/page.htm", name:"黄瑞章", info:"黄瑞章，女，2008年博士毕业于香港中文大学，2007至2011年任教于香港理工大学工业工程系，主要从事行业数据分析研究。现为贵州大学计算机科学与技术学院副教授，硕士生导师，IEEE会员。主要研究领域与方向：文本挖掘、机器学习、信息提取、知识学习。近五年来，作为课题负责人主持国家自然科学基金课题、国家教育部高等学校博士学科点专项科研基金课题、国家科技部创新基金课题、贵州省教育厅重点课题、贵州省科技厅重点课题多项。参与香港优配基金课题、国家自然科学基金课题多项。发表EI、SCI检索的论文20多篇，在数据挖掘领域国际顶级会议和期刊（SIGKDD、TKDE、TOIS、SIGIR、ICDM）等发表论文多篇。研究领域与方向：文本挖掘、机器学习、信息提取、知识学习。"},
+      ],
+    }
+
+  },
+  methods: {
+  }
+}
+</script>
+
+<style scoped>
+
+.bord{
+  background-color:#F8F8F8;
+  border:1px solid #CCC;
+  margin:0;
+  padding:0;
+}
+
+#tdls{
+  margin:5px 5px 10px;
+  padding:0;
+  font-size:12px;
+}
+
+#tdls h5.title{
+  margin:0;
+  padding:0;
+  height:52px;
+  line-height:52px;
+  font-size:18px;
+}
+
+#tdls h1.title{
+  margin:0;
+  padding:0;
+  height:52px;
+  line-height:52px;
+  font-size:22px;
+}
+
+#tdls h2.title{
+  margin:0;
+  padding:0;
+  height:52px;
+  line-height:52px;
+  font-size:18px;
+}
+
+#tdls h3.title{
+  margin:0;
+  padding-left: 14px;
+  height:52px;
+  line-height:52px;
+  font-size:18px;
+}
+
+#tdls h4.title{
+  margin:0;
+  padding:0;
+  height:52px;
+  line-height:52px;
+  font-size:18px;
+}
+
+.clear{
+  font-size:0;
+  height:0;
+  clear:both;
+  overflow:hidden;
+}
+
+</style>
