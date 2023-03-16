@@ -59,36 +59,13 @@ export default {
   font-size:18px;
 }
 
-#tdls h1.title{
-  margin:0;
-  padding:0;
-  height:52px;
-  line-height:52px;
-  font-size:22px;
-}
 
-#tdls h2.title{
-  margin:0;
-  padding:0;
-  height:52px;
-  line-height:52px;
-  font-size:18px;
-}
 
 #tdls h3.title{
-  margin:0;
+  padding-top: 4px;
   padding-left: 14px;
-  height:52px;
-  line-height:52px;
   font-size:18px;
-}
-
-#tdls h4.title{
-  margin:0;
-  padding:0;
-  height:52px;
-  line-height:52px;
-  font-size:18px;
+  height:32px;
 }
 
 .clear{

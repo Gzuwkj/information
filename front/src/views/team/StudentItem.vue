@@ -30,6 +30,27 @@ export default {
 
 <style scoped>
 
+.teamtb th, .teamtb td{
+  padding:3px 5px;
+  line-height:18px;
+  border:1px dotted #d8d8d8;
+}
+
+.teamtb{
+  border-collapse:collapse;
+  border-spacing:0;
+  width:95%;
+  float:left;margin:0 8px 10px 8px;
+}
+
+td.tdinfo{
+  vertical-align:top;
+}
+
+td.tdimg{
+  width:120px;
+}
+
 .divinfo_s{
   height:135px;overflow:auto;vertical-align:top;
 }
