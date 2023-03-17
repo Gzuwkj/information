@@ -7,7 +7,7 @@
         <td><a :href="aHref">{{ name }}</a></td>
       </tr>
       <tr>
-        <td>教授</td>
+        <td>{{ pos }}</td>
       </tr>
       <tr>
         <td class="tdinfo">
@@ -27,7 +27,8 @@ export default {
     imgUrl:String,
     aHref:String,
     name:String,
-    info:String
+    info:String,
+    pos:String
   }
 }
 </script>
@@ -41,6 +42,7 @@ export default {
 }
 
 .t{
+  padding-top:8px;
   width:50%;
   float:left;
 }
@@ -49,7 +51,8 @@ export default {
   border-collapse:collapse;
   border-spacing:0;
   width:95%;
-  float:left;margin:0 8px 10px 8px;
+  float:left;
+  margin:0 8px 10px 8px;
 }
 
 td.tdinfo{

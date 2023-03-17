@@ -40,7 +40,8 @@ export default {
   border-collapse:collapse;
   border-spacing:0;
   width:95%;
-  float:left;margin:0 8px 10px 8px;
+  float:left;
+  margin:0 8px 10px 8px;
 }
 
 td.tdinfo{
@@ -52,10 +53,14 @@ td.tdimg{
 }
 
 .divinfo_s{
-  height:135px;overflow:auto;vertical-align:top;
+  height:135px;
+  overflow:auto;
+  vertical-align:top;
 }
 
 .q{
-  width:33.3%;float:left;
+  width:33.3%;
+  float:left;
 }
+
 </style>
