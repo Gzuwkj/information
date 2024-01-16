@@ -83,7 +83,9 @@ export default {
     test() {
       let params = {
         api_id: [window.entityAPI, window.relationAPI, window.eventAPI],
-        text: window.text
+        text: window.text,
+        head:window.head,
+        tail:window.tail,
       }
       this.waiting=true
       this.$parent.setWaiting()
@@ -104,8 +106,6 @@ export default {
         }
         jsons = [relationJson,]
         this.relationInfo = jsons.map(i => this.processR(i))
-
-
       })
       // let text = `{"sentence": ["新", "华", "社", "兰", "州"], "ner": [{"index": [0, 3], "type": "ORG"}]}`
       // text=JSON.parse(text)
