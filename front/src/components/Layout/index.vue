@@ -49,6 +49,9 @@
       <div class="layout-content" v-if="select==='3'">
         <team></team>
       </div>
+      <div class="layout-content" v-if="select==='4'">
+        <analyze></analyze>
+      </div>
       <div class="layout-copy">
         2011-2016 &copy; TalkingData
       </div>
@@ -59,7 +62,7 @@
 import img from '@/assets/logo.png'
 import QA from '@/views/QA/index.vue'
 import team from "@/views/team";
-
+import analyze from "../../views/analyze/index.vue";
 export default {
   name: "index",
   data(){
@@ -70,7 +73,8 @@ export default {
   },
   components: {
     team,
-    QA
+    QA,
+    analyze,
   },
   methods:{
     searchSelect(id){
