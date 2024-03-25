@@ -11,10 +11,120 @@ export default {
   // import 引入的组件需要注入到对象中才能使用
   components: {},
   props: {},
-  data () {
+  data() {
     // 这里存放数据
     return {
-      datas : [
+      "rel_list": [
+        {
+          "e1": {
+            "e": 3,
+            "s": 1,
+            "text": "中国",
+            "type": "org"
+          },
+          "e2": {
+            "e": 3,
+            "s": 1,
+            "text": "中国",
+            "type": "org"
+          },
+          "relation": "PART-WHOLE",
+          "tokens": [
+            "但中国现在主要的募捐手法却是由政府机关和事业单位动员雇员捐款"
+          ]
+        },
+        {
+          "e1": {
+            "e": 3,
+            "s": 1,
+            "text": "中国",
+            "type": "org"
+          },
+          "e2": {
+            "e": 20,
+            "s": 16,
+            "text": "政府机关",
+            "type": "org"
+          },
+          "relation": "PART-WHOLE",
+          "tokens": [
+            "但中国现在主要的募捐手法却是由政府机关和事业单位动员雇员捐款"
+          ]
+        },
+        {
+          "e1": {
+            "e": 3,
+            "s": 1,
+            "text": "中国",
+            "type": "org"
+          },
+          "e2": {
+            "e": 25,
+            "s": 21,
+            "text": "事业单位",
+            "type": "org"
+          },
+          "relation": "PART-WHOLE",
+          "tokens": [
+            "但中国现在主要的募捐手法却是由政府机关和事业单位动员雇员捐款"
+          ]
+        },
+        {
+          "e1": {
+            "e": 20,
+            "s": 16,
+            "text": "政府机关",
+            "type": "org"
+          },
+          "e2": {
+            "e": 20,
+            "s": 16,
+            "text": "政府机关",
+            "type": "org"
+          },
+          "relation": "PART-WHOLE",
+          "tokens": [
+            "但中国现在主要的募捐手法却是由政府机关和事业单位动员雇员捐款"
+          ]
+        },
+        {
+          "e1": {
+            "e": 20,
+            "s": 16,
+            "text": "政府机关",
+            "type": "org"
+          },
+          "e2": {
+            "e": 25,
+            "s": 21,
+            "text": "事业单位",
+            "type": "org"
+          },
+          "relation": "PART-WHOLE",
+          "tokens": [
+            "但中国现在主要的募捐手法却是由政府机关和事业单位动员雇员捐款"
+          ]
+        },
+        {
+          "e1": {
+            "e": 25,
+            "s": 21,
+            "text": "事业单位",
+            "type": "org"
+          },
+          "e2": {
+            "e": 25,
+            "s": 21,
+            "text": "事业单位",
+            "type": "org"
+          },
+          "relation": "PART-WHOLE",
+          "tokens": [
+            "但中国现在主要的募捐手法却是由政府机关和事业单位动员雇员捐款"
+          ]
+        }
+      ],
+      datas: [
         {
           name: '增值税',
           symbolSize: 60,
@@ -350,13 +460,11 @@ export default {
         },
 
 
-
-
       ],
-      linkmes :[{
+      linkmes: [{
         source: '增值税',
         target: '增值税事件'
-      },{
+      }, {
         source: '增值税',
         target: '增值税事件1'
       },
@@ -437,7 +545,7 @@ export default {
     drawChart() {
       var myChart = this.$echarts.init(document.getElementById('OdfMes'));
       let option;
-      let categories=[]
+      let categories = []
       categories[0] = {
         name: '税务类别'
       }, categories[1] = {
@@ -484,7 +592,8 @@ export default {
                 borderWidth: 1,
                 borderType: 'solid',
                 symbolSize: 40,
-              }},
+              }
+            },
             force: {
               repulsion: 300,
               edgeLength: 10
@@ -512,25 +621,26 @@ export default {
 
   },
   mounted() {
+
     this.drawChart()
   },
   // 生命周期 - 创建完成（可以访问当前this 实例）
-  setup () {
+  setup() {
   },
   // 生命周期 - 挂载完成（可以访问 DOM 元素）
-  onMounted () {
+  onMounted() {
   },
-  onBeforeMount () {
+  onBeforeMount() {
   }, // 生命周期 - 挂载之前
-  onBeforeUpdate () {
+  onBeforeUpdate() {
   }, // 生命周期 - 更新之前
-  onUpdated () {
+  onUpdated() {
   }, // 生命周期 - 更新之后
-  onBeforeUnmount () {
+  onBeforeUnmount() {
   }, // 生命周期 - 销毁之前
-  onUnmounted () {
+  onUnmounted() {
   }, // 生命周期 - 销毁完成
-  onErrorCaptured () {
+  onErrorCaptured() {
   } // 如果页面有 keep-alive 缓存功能,这个函数会触发
 }
 </script>

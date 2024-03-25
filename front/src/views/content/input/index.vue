@@ -1,8 +1,8 @@
 <template>
   <div class="content-main">
     <Input class="input" type="textarea" :rows="4" v-model="text" placeholder="请输入抽取原始文本"></Input>
-    <Input class="input2" placeholder="请给出头实体" v-model="head"></Input>
-    <Input class="input2" placeholder="请给出尾实体" v-model="tail"></Input>
+<!--    <Input class="input2" placeholder="请给出头实体" v-model="head"></Input>-->
+<!--    <Input class="input2" placeholder="请给出尾实体" v-model="tail"></Input>-->
     <Row>
       <Button v-if="this.waiting===false" type="primary" :loading="loading" shape="circle" icon="ios-search"
               @click="create">构建

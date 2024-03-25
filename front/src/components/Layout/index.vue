@@ -22,6 +22,10 @@
           <Icon type="ios-people"></Icon>
           分析
         </Menu-item>
+        <Menu-item name="5">
+          <Icon type="ios-people"></Icon>
+          测试
+        </Menu-item>
 <!--        <Submenu name="5">-->
 <!--          <template slot="title">-->
 <!--            <Icon type="stats-bars"></Icon>-->
@@ -49,6 +53,10 @@
       <div class="layout-content" v-if="select==='3'">
         <team></team>
       </div>
+      <div class="layout-content" v-if="select==='5'">
+        <test></test>
+      </div>
+
       <div class="layout-copy">
         2011-2016 &copy; TalkingData
       </div>
@@ -59,6 +67,7 @@
 import img from '@/assets/logo.png'
 import QA from '@/views/QA/index.vue'
 import team from "@/views/team";
+import test from "@/views/test/index.vue";
 
 export default {
   name: "index",
@@ -70,7 +79,8 @@ export default {
   },
   components: {
     team,
-    QA
+    QA,
+    test
   },
   methods:{
     searchSelect(id){

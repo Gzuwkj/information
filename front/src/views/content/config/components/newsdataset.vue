@@ -9,11 +9,11 @@
       <h4 class="padding-bottom">关系抽取模型</h4>
       <Cascader v-model="searchRelationModel" :data="relationModel"></Cascader>
     </Row>
-<!--    <Row class="padding-top">-->
-<!--      <h4 class="padding-bottom">事件抽取模型</h4>-->
-<!--      <Cascader v-model="searchEventModel" :data="eventModel"-->
-<!--                id="event"></Cascader>-->
-<!--    </Row>-->
+    <Row class="padding-top">
+      <h4 class="padding-bottom">事件抽取模型</h4>
+      <Cascader v-model="searchEventModel" :data="eventModel"
+                id="event"></Cascader>
+    </Row>
   </div>
 </template>
 
@@ -32,7 +32,7 @@ export default {
     Check() {
       if (this.searchEntityModel.length > 0 && this.searchRelationModel.length) {
         window.relationAPI = this.searchRelationModel[0]
-        window.eventAPI = 4
+        window.eventAPI = this.searchEventModel[0]
         window.entityAPI = this.searchEntityModel[0]
         return true
       }
@@ -59,15 +59,15 @@ export default {
             class: 'entity'
           })
         }
-        // for (let i = 0; i < response.eve_model_list1.length; i++) {
-        //   eventModel.push({
-        //     value: response.eve_model_list1[i].id, label: response.eve_model_list1[i].name,
-        //     class: 'event'
-        //   })
-        // }
+        for (let i = 0; i < response.eve_model_list1.length; i++) {
+          eventModel.push({
+            value: response.eve_model_list1[i].id, label: response.eve_model_list1[i].name,
+            class: 'event'
+          })
+        }
         this.relationModel = relationModel
         this.entityModel = entityModel
-        // this.eventModel = eventModel
+        this.eventModel = eventModel
       })
     },
   },

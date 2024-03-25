@@ -1,6 +1,6 @@
 <template>
 
-  <Row class="row bg-white" style="height: 30rem" :gutter="16">
+  <Row class="row bg-white" style="height: 60rem" :gutter="16">
     <Tabs :animated="false" style="height: 100%;display: flex;flex-direction: column" value="name1"
           cust-content-class="tabs-container">
       <Tab-pane label="实体抽取情况" name="name1">
@@ -16,10 +16,11 @@
         </div>
       </Tab-pane>
       <Tab-pane label="事件抽取情况" name="name3">
-        <paragraph v-if="waiting===false" v-for="(p, idx) in relationInfo" :paragraph="p" :key="idx"/>
-        <div v-else class="demo-spin-container">
-          <Spin size="large" fix></Spin>
-        </div>
+        <eventShow ref="eventRef"/>
+        <!--        <paragraph v-if="waiting===false" v-for="(p, idx) in relationInfo" :paragraph="p" :key="idx"/>-->
+        <!--        <div v-else class="demo-spin-container">-->
+        <!--          <Spin size="large" fix></Spin>-->
+        <!--        </div>-->
       </Tab-pane>
     </Tabs>
   </Row>
@@ -27,16 +28,19 @@
 
 <script>
 import paragraph from "@/views/content/display/components/paragraph";
+import eventShow from "./components/eventShow.vue";
 import {getSentence} from "@/api";
 
 export default {
   components: {
+    eventShow,
     paragraph,
   },
 
   data() {
     return {
       waiting: false,
+      eventInfo: [],
       entityInfo: [],
       relationInfo: [],
       entityType2Color: {
@@ -60,7 +64,7 @@ export default {
   },
 
   created() {
-    window.waiting=false
+    window.waiting = false
     let text = `{"sentence": ["新", "华", "社", "兰", "州"], "ner": [{"index": [0, 3], "type": "ORG"}]}`
     const jsons = [
       JSON.parse(text),
@@ -75,37 +79,101 @@ export default {
       JSON.parse(`{"tokens": ["CNN's", "Wolf", "Blitzer", "reports", "according", "to", "an", "eyewitness,", "a", "bomb", "has", "hit", "central", "Baghdad", "only", "a", "few", "hundred", "meters", "from", "the", "Palestine", "Hotel"], "e1": {"text": "an eyewitness", "s": 40, "e": 42, "type": "PER"}, "e2": {"text": "central Baghdad", "s": 70, "e": 72, "type": "LOC"}, "relation": "PHYS"}`),
       JSON.parse(`{"tokens": ["Corpsmen", "quickly", "take", "patients", "by", "ambulance", "away", "from", "the", "blowing", "sand", "to", "a", "triage", "tent"], "e1": {"text": "Corpsmen", "s": 0, "e": 1, "type": "PER"}, "e2": {"text": "a triage tent", "s": 74, "e": 77, "type": "FAC"}, "relation": "PHYS"}`),
     ]
+    console.log(jsons)
     this.entityInfo = jsons.map(i => this.processE(i))
+
     this.relationInfo = relationJson.map(i => this.processR(i))
+
   },
   computed: {},
   methods: {
+    judgeNumber(num) {
+      return new Promise(function (resolve, reject) {
+        num = 5;
+        if (num < 5) {
+          resolve("num小于5，值为：" + num);
+        } else {
+          reject("num不小于5，值为：" + num);
+        }
+      });
+    },
     test() {
+      // this.eventInfo = [{
+      //   'id': '1',
+      //   'event_list': [{
+      //     'event_type': '司法行为-起诉',
+      //     'arguments': [{'role': '时间', 'argument': '昨天'}, {
+      //       'role': '原告',
+      //       'argument': '隔壁家阿黄'
+      //     }, {'role': '被告', 'argument': '村头王叔家的儿子'}]
+      //   }]
+      // }, {
+      //   'id': '1',
+      //   'event_list': [{
+      //     'event_type': '司法行为-起诉',
+      //     'arguments': [{'role': '时间', 'argument': '昨天'}, {
+      //       'role': '原告',
+      //       'argument': '隔壁家阿黄'
+      //     }, {'role': '被告', 'argument': '村头王叔家的儿子'}]
+      //   }]
+      // }, {
+      //   'id': '1',
+      //   'event_list': [{
+      //     'event_type': '司法行为-起诉',
+      //     'arguments': [{'role': '时间', 'argument': '昨天'}, {
+      //       'role': '原告',
+      //       'argument': '隔壁家阿黄'
+      //     }, {'role': '被告', 'argument': '村头王叔家的儿子'}]
+      //   }]
+      // }, {
+      //   'id': '1',
+      //   'event_list': [{
+      //     'event_type': '司法行为-起诉',
+      //     'arguments': [{'role': '时间', 'argument': '昨天'}, {
+      //       'role': '原告',
+      //       'argument': '隔壁家阿黄'
+      //     }, {'role': '被告', 'argument': '村头王叔家的儿子'}]
+      //   }]
+      // }]
+
       let params = {
         api_id: [window.entityAPI, window.relationAPI, window.eventAPI],
         text: window.text,
-        head:window.head,
-        tail:window.tail,
+        head: window.head,
+        tail: window.tail,
       }
-      this.waiting=true
+      this.waiting = true
       this.$parent.setWaiting()
       getSentence(params).then(response => {
-        this.waiting=false
+        this.waiting = false
         this.$parent.setWaiting()
         console.log(response)
-        let entityJson = {sentence: response.ner_sentence, ner: response.ner[0]}
-        console.log(entityJson)
-        let jsons = [entityJson,]
-        this.entityInfo = jsons.map(i => this.processE(i))
+        let entityJson = response.ner_list
+        this.entityInfo = entityJson.map(i => this.processE(i))
         console.log(this.entityInfo)
-        let relationJson = {
-          tokens: response.relation_sentence,
-          e1: response.e1[0],
-          e2: response.e2,
-          relation: response.relation
+        // jsons = response.rel_list
+        let relationList = []
+        for (let i = 0; i < response.rel_list.length; i++) {
+          relationList.push(
+            {
+              tokens: response.rel_list[i].tokens,
+              e1: response.rel_list[i].e1,
+              e2: response.rel_list[i].e2,
+              relation: response.rel_list[i].relation
+            }
+          )
         }
-        jsons = [relationJson,]
-        this.relationInfo = jsons.map(i => this.processR(i))
+        this.relationInfo = relationList.map(i => this.processR(i))
+        for (let i = 0; i < response.event_list.length; i++) {
+          this.eventInfo.push(
+            {
+              id: response.event_list[i]['event'][0].id,
+              event_list: response.event_list[i]['event'][0].event_list
+            }
+          )
+        }
+        console.log(this.eventInfo)
+        this.$refs.eventRef.createEvent(this.eventInfo);
       })
       // let text = `{"sentence": ["新", "华", "社", "兰", "州"], "ner": [{"index": [0, 3], "type": "ORG"}]}`
       // text=JSON.parse(text)
